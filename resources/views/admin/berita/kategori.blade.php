@@ -44,11 +44,14 @@
                             <td>{{ $no + 1 }}</td>
                             <td>{{ $k->nama_kategori }}</td>
                             <td>
-                                <form action="{{ route('kategori.destroy', $k->id) }}" method="POST" onsubmit="return confirm('Hapus kategori ini juga akan berdampak pada berita terkait. Yakin?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
-                                </form>
+                                <div class="d-flex gap-1">
+                                    <a href="{{ route('berita.kategori_edit', $k->id) }}" class="btn btn-sm btn-outline-secondary mr-2">Edit</a>
+                                    <form action="{{ route('kategori.destroy', $k->id) }}" method="POST" onsubmit="return confirm('Hapus kategori ini juga akan berdampak pada berita terkait. Yakin?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @empty

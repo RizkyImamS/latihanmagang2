@@ -111,6 +111,27 @@ class BeritaController extends Controller
         return back()->with('success', 'Kategori baru berhasil ditambahkan!');
     }
 
+    public function kategori_edit($id)
+    {
+        $kategori = KategoriBerita::findOrFail($id);
+        return view('admin.berita.kategori_edit', compact('kategori'));
+    }
+
+    public function kategori_update(Request $request, $id)
+    {
+        $kategori = KategoriBerita::findOrFail($id);
+
+        $request->validate([
+            'nama_kategori' => 'required|unique:kategori_beritas,nama_kategori,' . $kategori->id
+        ]);
+
+        $kategori->update([
+            'nama_kategori' => $request->nama_kategori
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui!');
+    }
+
     public function kategori_destroy($id)
     {
         $kategori = KategoriBerita::findOrFail($id);

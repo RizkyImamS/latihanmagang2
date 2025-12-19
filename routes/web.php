@@ -31,6 +31,11 @@ Route::middleware(['auth_admin'])->group(function () {
     Route::get('admin/kategori', [BeritaController::class, 'kategori'])->name('kategori.index');
     Route::post('admin/kategori', [BeritaController::class, 'kategori_store'])->name('kategori.store');
     Route::delete('admin/kategori/{id}', [BeritaController::class, 'kategori_destroy'])->name('kategori.destroy');
+    Route::get('/admin/kategori/{id}/edit', [BeritaController::class, 'kategori_edit'])
+        ->name('berita.kategori_edit');
+
+    Route::put('/admin/kategori/{id}', [BeritaController::class, 'kategori_update'])
+        ->name('kategori.update');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
